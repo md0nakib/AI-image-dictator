@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import type { AnalysisResult } from '../types';
 
@@ -52,6 +51,7 @@ export async function analyzeImageForAI(base64Image: string, mimeType: string): 
     return result as AnalysisResult;
   } catch (error) {
     console.error("Error analyzing image with Gemini:", error);
-    throw new Error("চিত্র বিশ্লেষণ করতে ব্যর্থ। অনুগ্রহ করে আবার চেষ্টা করুন।");
+    // FIX: Rethrow the original error so the UI layer can handle specific error cases, like invalid API keys.
+    throw error;
   }
 }
